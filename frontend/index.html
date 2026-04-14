@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Quant Trading Terminal</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <div class="dashboard-container">
+        <aside class="sidebar glass-panel">
+            <div class="logo-container">
+                <div class="glowing-orb"></div>
+                <h2 class="logo">QUANT<span class="neon-blue">AI</span></h2>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active" onclick="switchTab('dashboard')">⊞ Dashboard</li>
+                    <li onclick="switchTab('price-data')">📈 Price Data</li>
+                    <li onclick="switchTab('returns')">📊 Returns & Vol</li>
+                    <li onclick="switchTab('capm')">📐 CAPM Model</li>
+                    <li onclick="switchTab('correlation')">🔗 Matrix</li>
+                    <li onclick="switchTab('min-variance')">⚡ Min Variance</li>
+                    <li onclick="switchTab('frontier')">🌌 Frontier AI</li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="glass-panel header-3d">
+                <h1>NIFTY 40 MULTI-FACTOR ENGINE</h1>
+                <div class="status-indicator">
+                    <span class="dot live pulse"></span> 127.0.0.1 LINKED
+                </div>
+            </header>
+
+            <section id="dashboard" class="tab-content active">
+                <div class="kpi-cards">
+                    <div class="card glass-panel 3d-hover">
+                        <h3>SERVER STATUS</h3>
+                        <p class="neon-green data-pop">ONLINE</p>
+                    </div>
+                    <div class="card glass-panel 3d-hover">
+                        <h3>DATA ASSETS</h3>
+                        <p class="neon-blue data-pop">40 STOCKS</p>
+                    </div>
+                    <div class="card glass-panel 3d-hover">
+                        <h3>RISK FREE RATE</h3>
+                        <p class="neon-purple data-pop">6.50%</p>
+                    </div>
+                </div>
+                <div class="terminal-box glass-panel 3d-hover">
+                    <div class="scanline"></div>
+                    <p class="typewriter">> INITIALIZING 3D QUANT ENGINE...</p>
+                    <p class="typewriter" style="animation-delay: 1s;">> CONNECTING TO PORT 5000...</p>
+                    <p class="typewriter neon-green" style="animation-delay: 2s;">> SYSTEM READY. AWAITING COMMAND.</p>
+                </div>
+            </section>
+
+            <section id="price-data" class="tab-content">
+                <h2 class="section-title">HISTORICAL DATA</h2>
+                <button onclick="loadPrices()" class="action-btn glow-btn">EXECUTE QUERY</button>
+                <div class="table-container mt-2 glass-panel 3d-hover">
+                    <table class="data-table" id="price-table">
+                        <thead id="price-head"></thead>
+                        <tbody id="price-body"><tr><td>Awaiting execution...</td></tr></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="returns" class="tab-content">
+                <h2 class="section-title">VOLATILITY & RETURNS</h2>
+                <button onclick="loadReturns()" class="action-btn glow-btn">EXECUTE QUERY</button>
+                <div class="table-container mt-2 glass-panel 3d-hover">
+                    <table class="data-table">
+                        <thead><tr><th>TICKER</th><th>ANNUAL RETURN</th><th>VOLATILITY (RISK)</th></tr></thead>
+                        <tbody id="returns-body"><tr><td colspan="3">Awaiting execution...</td></tr></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="capm" class="tab-content">
+                <h2 class="section-title">CAPITAL ASSET PRICING MODEL</h2>
+                <button onclick="loadCAPMData()" class="action-btn glow-btn">EXECUTE QUERY</button>
+                <div class="table-container mt-2 glass-panel 3d-hover">
+                    <table class="data-table">
+                        <thead><tr><th>TICKER</th><th>ACTUAL RETURN</th><th>BETA (NIFTY)</th><th>CAPM EXPECTED</th></tr></thead>
+                        <tbody id="capm-table-body"><tr><td colspan="4">Awaiting execution...</td></tr></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="correlation" class="tab-content">
+                <h2 class="section-title">PEARSON MATRIX</h2>
+                <button onclick="loadCorrelationData()" class="action-btn glow-btn">GENERATE MATRIX</button>
+                <div class="table-container mt-2 glass-panel 3d-hover" style="overflow-x: auto; max-height: 500px;">
+                    <table class="data-table correlation-matrix">
+                        <thead id="correlation-head"></thead>
+                        <tbody id="correlation-body"><tr><td>Awaiting execution...</td></tr></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="min-variance" class="tab-content">
+                <h2 class="section-title">AI MIN-VARIANCE OPTIMIZATION</h2>
+                <button onclick="runOptimization()" class="action-btn glow-btn">RUN SLSQP SOLVER</button>
+                <div class="kpi-cards mt-2">
+                    <div class="card glass-panel 3d-hover"><h3>MINIMUM RISK</h3><p id="min-vol" class="neon-blue data-pop">--</p></div>
+                    <div class="card glass-panel 3d-hover"><h3>EXPECTED RETURN</h3><p id="min-vol-ret" class="neon-green data-pop">--</p></div>
+                </div>
+                <div class="table-container mt-2 glass-panel 3d-hover">
+                    <table class="data-table">
+                        <thead><tr><th>TICKER</th><th>OPTIMAL WEIGHT</th></tr></thead>
+                        <tbody id="min-variance-weights"><tr><td colspan="2">Awaiting execution...</td></tr></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="frontier" class="tab-content">
+                <h2 class="section-title">MARKOWITZ EFFICIENT FRONTIER</h2>
+                <button onclick="loadFrontier()" class="action-btn glow-btn">SIMULATE 500 PORTFOLIOS</button>
+                <div class="chart-box mt-2 glass-panel 3d-hover" style="padding: 20px;">
+                    <canvas id="frontierChart"></canvas>
+                </div>
+            </section>
+
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
