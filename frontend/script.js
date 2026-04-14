@@ -1,7 +1,7 @@
 // DYNAMIC API URL: Uses localhost for development and Render for production
 const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
     ? 'http://127.0.0.1:5001/api' 
-    : 'https://your-backend-name.onrender.com/api'; // REPLACE with your actual Render URL
+    : 'https://my-backend-zhzz.onrender.com'; // REPLACE with your actual Render URL
 
 let frontierChartInstance = null;
 
