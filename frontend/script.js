@@ -204,4 +204,4 @@ async function loadFrontier() {
         console.error("Frontier fetch failed:", e.message); 
         alert(`Failed to load Frontier: ${e.message}`);
     }
-}
+}Ī
